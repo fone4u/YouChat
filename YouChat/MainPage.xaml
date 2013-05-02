@@ -29,7 +29,8 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <HyperlinkButton Content="查看朋友列表" FontSize="45"
+            <HyperlinkButton Content="查看朋友列表" FontSize="45" 
+                             HorizontalAlignment="Center" VerticalAlignment="Top"
                              NavigateUri="/View/FriendsListPage.xaml"/>
         </Grid>
     </Grid>
