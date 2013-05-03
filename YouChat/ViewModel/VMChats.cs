@@ -16,6 +16,16 @@ namespace YouChat.ViewModel
 
         private ICommunicate Communicater;
 
+        public VMChats()
+        {
+            Communicater Communicater = new Tools.Communicater();
+            Communicater.SomeThingHappen += Communicater_SomeThingHappen;
+        }
+
+        public void Communicater_SomeThingHappen(object sender, EventArgs e)
+        {
+            Messages.Add(new MDMessage() { MsgContent = e.ToString(), IsFromMe = false });
+        }
 
         public void GetMessages(int number)
         {

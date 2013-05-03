@@ -19,6 +19,8 @@ namespace YouChat.Tools
 
         public void Heartbeat()
         {
+            //todo 这里应该定时跟后台进行通讯，并且是多线程的，在后台线程运行，发生时通知给前台
+
             if (this.SomeThingHappen != null)
                 this.SomeThingHappen(null, null);
         }

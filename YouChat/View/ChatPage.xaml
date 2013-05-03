@@ -1,45 +1,75 @@
-﻿<phone:PhoneApplicationPage
-    x:Class="YouChat.View.ChatPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+﻿<phone:PhoneApplicationPage x:Class="YouChat.View.ChatPage"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                            FontSize="{StaticResource PhoneFontSizeNormal}"
+                            Foreground="{StaticResource PhoneForegroundBrush}"
+                            Orientation="Portrait"
+                            SupportedOrientations="Portrait"
+                            shell:SystemTray.IsVisible="True"
+                            mc:Ignorable="d">
 
-    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <!--  LayoutRoot 是包含所有页面内容的根网格  -->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="569*" />
         </Grid.RowDefinitions>
 
-        <!--TitlePanel 包含应用程序的名称和页标题-->
+        <!--  TitlePanel 包含应用程序的名称和页标题  -->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="我的应用程序" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="我的应用程序" />
         </StackPanel>
 
-        <!--ContentPanel - 在此处放置其他内容-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox ItemsSource="{Binding}" x:Name="lstBxChats">
+        <!--  ContentPanel - 在此处放置其他内容  -->
+        <Grid x:Name="ContentPanel"
+              Grid.Row="1"
+              Grid.RowSpan="2"
+              Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="47*" />
+                <RowDefinition Height="90" />
+            </Grid.RowDefinitions>
+            <ListBox x:Name="lstBxChats"
+                     Grid.Row="0"
+                     ItemsSource="{Binding}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid MinWidth="400">
-                            <TextBlock FontSize="35" 
+                            <TextBlock Margin="10"
                                        HorizontalAlignment="{Binding Path=HorizontalAlignment}"
-                                       VerticalAlignment="Center" 
-                                       Text="{Binding Path=MsgContent, Mode=OneWay}" />
+                                       VerticalAlignment="Center"
+                                       FontSize="35"
+                                       Text="{Binding Path=MsgContent,
+                                                      Mode=OneWay}"
+                                       TextWrapping="Wrap" />
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <TextBox x:Name="tbx_msg"
+                     Grid.Row="1"
+                     Width="380"
+                     Height="72"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Center"
+                     Tap="tbx_msg_Tap"
+                     Text="请输入内容...."
+                     TextWrapping="Wrap" />
+            <Button x:Name="btn_send"
+                    Grid.Row="1"
+                    Width="80"
+                    Height="80"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Click="btn_send_Click"
+                    Content="发" />
         </Grid>
+
     </Grid>
 
 </phone:PhoneApplicationPage>
