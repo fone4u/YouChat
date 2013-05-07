@@ -12,20 +12,18 @@ namespace YouChat.ViewModel
     {
         public ObservableCollection<MDMessage> Messages;
 
-        public event EventHandler<ChatMessageEventArgs> NewMessageArrived;
-
-        private ICommunicate Communicater;
+        private ICommunicate Communicater = new CommunicaterForTest();
 
         public VMChats()
         {
-            Communicater Communicater = new Tools.Communicater();
             Communicater.SomeThingHappen += Communicater_SomeThingHappen;
         }
 
-        public void Communicater_SomeThingHappen(object sender, EventArgs e)
+        public void Communicater_SomeThingHappen(object sender, EventCommunicateArgs e)
         {
-            Messages.Add(new MDMessage() { MsgContent = e.ToString(), IsFromMe = false });
+            Messages.Add(new MDMessage() { IsFromMe = false, MsgContent = e.MessageContent });
         }
+
 
         public void GetMessages(int number)
         {
@@ -38,7 +36,24 @@ namespace YouChat.ViewModel
                 Messages.Add(new MDMessage() { MsgContent = "你好啊~！" + i.ToString(), IsFromMe = IsFromMe });
             }
         }
-        
+
+        public event EventHandler SendMessageComplete;
+
+        public void SendMessage(string StrMsg)
+        {
+            MDMessage msg = new Model.MDMessage() { MsgContent = StrMsg, IsFromMe = true };
+            Messages.Add(msg);
+            Communicater.SendMessageOK += Communicater_SendMessageOK;
+            Communicater.Send(msg);            
+        }
+
+        private void Communicater_SendMessageOK(object sender, EventArgs e)
+        {
+            if (SendMessageOK != null)
+                SendMessageOK(null, null);
+        }
+
+        public event EventHandler SendMessageOK;
     }
 
 

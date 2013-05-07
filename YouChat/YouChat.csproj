@@ -67,6 +67,7 @@
     <Compile Include="Model\MDMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\Communicater.cs" />
+    <Compile Include="Tools\WebClientSimulater.cs" />
     <Compile Include="Tools\ICommunicate.cs" />
     <Compile Include="ViewModel\VMChats.cs" />
     <Compile Include="ViewModel\VMFriends.cs" />
